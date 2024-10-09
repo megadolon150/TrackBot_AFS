@@ -59,3 +59,17 @@ void wheelRobotTurnOnSpot(bool right) {
         zRobotSetMotorSpeed(2, -speed);
     }
 }
+
+
+void wheelRobotBackTurnLeft() {
+    
+    zRobotSetMotorSpeed(1, 0);
+    zRobotSetMotorSpeed(2, -speed);
+    
+}
+void wheelRobotBackTurnRight() {
+    
+    zRobotSetMotorSpeed(1, speed);
+    zRobotSetMotorSpeed(2, 0);
+    
+}

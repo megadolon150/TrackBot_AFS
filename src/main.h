@@ -214,6 +214,24 @@ void avoidRightTurn(int timer) {
       stance.avoidTicks = 0;
     }
 }
+void avoidBackwardLeftTurn(int timer) {
+    wheelRobotBackTurnLeft();  
+    LEDrobotRight();
+    stance.avoidTicks++;
+    if(stance.avoidTicks > timer) {
+      stance.avoidState++;
+      stance.avoidTicks = 0;
+    }
+}
+void avoidBackwardRightTurn(int timer) {
+    wheelRobotBackTurnRight();  
+    LEDrobotRight();
+    stance.avoidTicks++;
+    if(stance.avoidTicks > timer) {
+      stance.avoidState++;
+      stance.avoidTicks = 0;
+    }
+}
 
 /* Drived forward until track is found. Then makes one turn and gets into drive-mode */
 void avoidWrapUp() {
@@ -289,22 +307,27 @@ void avoidObstacle()
 
     case 6:
       if(sensor.track == 3) {
-        avoidForward(11);
-      } else {
+        avoidForward(50);
+      } else {        
         stance.avoidTicks = 0;
         stance.avoidState++;
       }
+      
       break;
 
-    case 7:
-      if(stance.clockwise) {
-        avoidRightTurn(1);
-      } else {
-        avoidLeftTurn(1);
-      }    
+    case 7:      
+      avoidForward(6);   
       break;
-
     case 8:
+        if(stance.clockwise) {
+          avoidBackwardRightTurn(4);
+        } else {
+          avoidBackwardLeftTurn(4);
+        }
+      
+    break;
+
+    case 9:
       avoidWrapUp();
       break;
   }
